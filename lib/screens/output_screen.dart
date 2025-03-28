@@ -1,4 +1,4 @@
-import 'package:compressor/screens/main_screen.dart';
+import '../screens/main_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:super_clipboard/super_clipboard.dart';
 

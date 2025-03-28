@@ -1,5 +1,5 @@
-name: compressor
-description: "App to compress files."
+name: media_squeeze
+description: "App to compress media files."
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:animations/animations.dart';
-import 'package:compressor/screens/output_screen.dart';
+import 'screens/output_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:window_size/window_size.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ const double windowHeight = 500;
 void setupWindow() {
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
     WidgetsFlutterBinding.ensureInitialized();
-    setWindowTitle('Compressor by 9783e6');
+    setWindowTitle('Media Squeeze by 9783e6');
     setWindowMinSize(const Size(windowWidth, windowHeight));
     setWindowMaxSize(const Size(windowWidth, windowHeight));
     getCurrentScreen().then((screen) {
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'Compressor',
+        title: 'Media Squeeze',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue, brightness: Brightness.dark),

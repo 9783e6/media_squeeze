@@ -18,6 +18,8 @@ get_os_type() {
         echo "macos"
     elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
         echo "linux"
+    elif [[ "$OSTYPE" == "msys"* ]]; then
+      echo "windows"
     else
         echo "unsupported"
     fi
@@ -30,7 +32,7 @@ comment_line() {
 
     if [[ "$os_type" == "macos" ]]; then
         sed -i '' "${line_number}s/^/#/" "$file"
-    elif [[ "$os_type" == "linux" ]]; then
+    elif [[ "$os_type" == "linux" || "$os_type" == "windows" ]]; then
         sed -i "${line_number}s/^/#/" "$file"
     else
         echo "Unsupported platform for sed operation"

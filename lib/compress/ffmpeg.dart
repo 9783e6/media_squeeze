@@ -61,7 +61,7 @@ Future<String> _runFFmpegCommand(String commandArguments) async {
 Future<File?> compressVideoToTargetSize(File file, int targetSizeMB) async {
   final String inputPath = file.path;
   final Directory tempDir = await getTemporaryDirectory();
-  final Directory appTempDir = Directory(tempDir.path + "/compressor_app");
+  final Directory appTempDir = Directory(tempDir.path + "/media_squeeze");
   print(appTempDir.path);
 
   if (!await appTempDir.exists()) {

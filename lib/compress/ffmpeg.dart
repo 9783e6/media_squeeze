@@ -10,11 +10,14 @@ Future<File> _getFFmpegExecutable() async {
   late final String fileName;
 
   if (Platform.isWindows) {
-    assetPath = 'assets/ffmpeg/ffmpeg.exe';
-    fileName = 'ffmpeg.exe';
+    assetPath = 'assets/ffmpeg/ffmpeg_win.exe';
+    fileName = 'ffmpeg_win.exe';
   } else if (Platform.isMacOS) {
-    assetPath = 'assets/ffmpeg/ffmpeg';
-    fileName = 'ffmpeg'; 
+    assetPath = 'assets/ffmpeg/ffmpeg_mac';
+    fileName = 'ffmpeg_mac'; 
+  } else if (Platform.isLinux) {
+    assetPath = 'assets/ffmpeg/ffmpeg_lix';
+    fileName = 'ffmpeg_lin'; 
   } else {
     throw UnsupportedError('This platform is not supported.');
   }

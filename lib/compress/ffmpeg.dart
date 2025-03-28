@@ -125,6 +125,6 @@ Future<void> compressVideo(
   int bitrate,
 ) async {
   final args =
-      '-i "$inputPath"  -b:v ${bitrate} -b:a 128k -maxrate ${bitrate} -bufsize ${bitrate * 2} -c:v libx264 -c:a aac -preset fast -map 0:v -map 0:a -y "$outputPath"';
+      '-i "$inputPath"  -b:v ${bitrate} -b:a 128k -maxrate ${bitrate} -bufsize ${bitrate * 2} -c:v libx264 -c:a aac -preset fast -map 0:v -map 0:a -y "$outputPath"'; // -map 0:a
   await _runFFmpegCommand(args);
 }

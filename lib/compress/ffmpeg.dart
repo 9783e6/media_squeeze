@@ -14,10 +14,10 @@ Future<File> _getFFmpegExecutable() async {
     fileName = 'ffmpeg_win.exe';
   } else if (Platform.isMacOS) {
     assetPath = 'assets/ffmpeg/ffmpeg_mac';
-    fileName = 'ffmpeg_mac'; 
+    fileName = 'ffmpeg_mac';
   } else if (Platform.isLinux) {
     assetPath = 'assets/ffmpeg/ffmpeg_lix';
-    fileName = 'ffmpeg_lin'; 
+    fileName = 'ffmpeg_lin';
   } else {
     throw UnsupportedError('This platform is not supported.');
   }
@@ -45,7 +45,7 @@ Future<String> _runFFmpegCommand(String commandArguments) async {
   var shell = Shell();
 
   try {
-    var result = await shell.run('$ffmpegPath $commandArguments');
+    var result = await shell.run('"$ffmpegPath" $commandArguments');
     return result.map((r) => r.outText).join("\n");
   } catch (e) {
     if (e is ShellException) {
@@ -53,11 +53,10 @@ Future<String> _runFFmpegCommand(String commandArguments) async {
       var errorOutput = e.result?.errText ?? "";
       return "Output:\n$output\nError:\n$errorOutput";
     }
-    
+
     return "Unknown Error: $e";
   }
 }
-
 
 Future<File?> compressVideoToTargetSize(File file, int targetSizeMB) async {
   final String inputPath = file.path;
@@ -70,7 +69,15 @@ Future<File?> compressVideoToTargetSize(File file, int targetSizeMB) async {
     print("Made dir");
   }
 
-  final String outputPath = appTempDir.path + "/" + inputPath.split("/").last.split("\\").last.replaceAll('.mp4', '_compressed.mp4');
+  final String outputPath =
+      appTempDir.path +
+      "/" +
+      inputPath
+          .split("/")
+          .last
+          .split("\\")
+          .last
+          .replaceAll('.mp4', '_compressed.mp4');
   print(outputPath);
 
   int targetSizeBits = targetSizeMB * 8000000;
@@ -79,7 +86,6 @@ Future<File?> compressVideoToTargetSize(File file, int targetSizeMB) async {
   int bitrate = targetSizeBits ~/ videoDuration;
 
   await compressVideo(inputPath, outputPath, bitrate);
-
 
   File outputFile = File(outputPath);
   final bool check = await outputFile.exists();
@@ -91,32 +97,34 @@ Future<File?> compressVideoToTargetSize(File file, int targetSizeMB) async {
   }
 }
 
-
-
-
 Future<double> getVideoDuration(String filePath) async {
   final commandArguments = '-i "$filePath"';
 
-  
   final output = await _runFFmpegCommand(commandArguments);
-  
+
   final durationRegExp = RegExp(r'Duration: (\d{2}):(\d{2}):(\d{2})\.(\d{2})');
   final match = durationRegExp.firstMatch(output);
-  
+
   if (match != null) {
     final hours = int.parse(match.group(1) ?? "0");
     final minutes = int.parse(match.group(2) ?? "0");
     final seconds = int.parse(match.group(3) ?? "0");
     final milliseconds = int.parse(match.group(4) ?? "0");
 
-    double total_seconds = (hours * 3600) + (minutes * 60) + seconds + (milliseconds / 100);
-    return total_seconds; 
+    double total_seconds =
+        (hours * 3600) + (minutes * 60) + seconds + (milliseconds / 100);
+    return total_seconds;
   } else {
     return 0;
   }
 }
 
-Future<void> compressVideo(String inputPath, String outputPath, int bitrate) async {
-  final args = '-i "$inputPath"  -b:v ${bitrate} -b:a 128k -maxrate ${bitrate} -bufsize ${bitrate*2} -c:v libx264 -c:a aac -preset fast -map 0:v -map 0:a -y "$outputPath"';
+Future<void> compressVideo(
+  String inputPath,
+  String outputPath,
+  int bitrate,
+) async {
+  final args =
+      '-i "$inputPath"  -b:v ${bitrate} -b:a 128k -maxrate ${bitrate} -bufsize ${bitrate * 2} -c:v libx264 -c:a aac -preset fast -map 0:v -map 0:a -y "$outputPath"';
   await _runFFmpegCommand(args);
 }

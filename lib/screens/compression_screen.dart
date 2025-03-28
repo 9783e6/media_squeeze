@@ -87,7 +87,7 @@ class _CompressionScreenState extends State<CompressionScreen> {
                 icon: Icon(Icons.rocket_launch),
                 label: Text("Compress with recommended settings")
               ),
-              TextButton(onPressed: () => print("test1"), child: Text("Adjust...")) // TODO
+              TextButton(onPressed: null, child: Text("Adjust... (WIP)"), ) // TODO
             ] else ...[
               Text('No file selected???'),
             ]

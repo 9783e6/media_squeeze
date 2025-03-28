@@ -1,16 +1,29 @@
-# compresser
+<h1 align="center" style="border-bottom: none">
+    <b>
+        <img src="./logo.png" title="MediaSqueeze Logo"/><br>
+    </b>
+    ⭐️  Compress media files with ease  ⭐️ <br>
+</h1>
 
-A new Flutter project.
+### 🚧 WORK IN PROGRESS! Only video compression supported yet.
 
-## Getting Started
+## Demo
 
-This project is a starting point for a Flutter application.
+![Preview](demo.gif)
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### [Download MediaSqueeze (macOS, Windows, and Linux)](https://github.com/9783e6/media_squeeze/releases)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Building from source code
+
+(On windows use Git Bash)
+
+```
+./download_ffmpeg.sh
+```
+
+```
+./build.sh [windows|macos|linux]
+```

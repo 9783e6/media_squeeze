@@ -45,16 +45,16 @@ modify_pubspec() {
 
   case "$PLATFORM" in
     windows)
-      comment_line 39
-      comment_line 40
+      comment_line 51
+      comment_line 52
       ;;
     macos)
-      comment_line 38
-      comment_line 40
+      comment_line 50
+      comment_line 52
       ;;
     linux)
-      comment_line 38
-      comment_line 39
+      comment_line 50
+      comment_line 51
       ;;
     *)
       echo "Unsupported platform: $PLATFORM"
@@ -70,6 +70,7 @@ modify_pubspec
 
 echo "Running Flutter build for $PLATFORM..."
 flutter build "$PLATFORM" --release
+# read
 
 echo "Restoring original $PUBSPEC..."
 mv "$BACKUP_PUBSPEC" "$PUBSPEC"

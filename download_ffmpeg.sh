@@ -17,7 +17,8 @@ rm -rf "$TEMP_DIR/*"
 
 echo "Downloading FFmpeg for Linux..."
 curl -L -o "$TEMP_DIR/ffmpeg-linux.tar.xz" https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
-tar -xf "$TEMP_DIR/ffmpeg-linux.tar.xz" --strip-components=1 -C "$TEMP_DIR" --wildcards '*/ffmpeg'
+FFMPEG_PATH=$(tar -tf "$TEMP_DIR/ffmpeg-linux.tar.xz" | grep '/ffmpeg$' | head -n 1)
+tar -xf "$TEMP_DIR/ffmpeg-linux.tar.xz" -C "$TEMP_DIR" --strip-components=1 "$FFMPEG_PATH"
 mv "$TEMP_DIR/ffmpeg" "$TARGET_DIR/ffmpeg_lin"
 chmod +x "$TARGET_DIR/ffmpeg_lin"
 rm -rf "$TEMP_DIR/*"
